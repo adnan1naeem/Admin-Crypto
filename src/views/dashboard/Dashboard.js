@@ -191,18 +191,13 @@ const Dashboard = () => {
               <CTable align="middle" className="mb-0 border" hover responsive>
                 <CTableHead color="light">
                   <CTableRow>
-                    <CTableHeaderCell className="text-center">
-                      <CIcon icon={cilPeople} />
-                    </CTableHeaderCell>
-                    <CTableHeaderCell>Total Players</CTableHeaderCell>
-                    <CTableHeaderCell className="text-center">
-                      Daily Quiz taken Today
-                    </CTableHeaderCell>
-                    <CTableHeaderCell>Cryptpo Challenges taken today</CTableHeaderCell>
-                    <CTableHeaderCell className="text-center">
-                      Active Players today
-                    </CTableHeaderCell>
-                    <CTableHeaderCell>Pepper spent today by players</CTableHeaderCell>
+                    <CTableHeaderCell>Image</CTableHeaderCell>
+                    <CTableHeaderCell className="text-center">Player Name</CTableHeaderCell>
+                    <CTableHeaderCell>Rank</CTableHeaderCell>
+                    <CTableHeaderCell className="text-center">Score</CTableHeaderCell>
+                    <CTableHeaderCell>Aroma</CTableHeaderCell>
+                    <CTableHeaderCell>XP</CTableHeaderCell>
+                    <CTableHeaderCell>Verified</CTableHeaderCell>
                   </CTableRow>
                 </CTableHead>
                 <CTableBody></CTableBody>
