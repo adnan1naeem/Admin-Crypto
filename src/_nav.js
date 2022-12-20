@@ -1,4 +1,4 @@
-import { CNavItem } from '@coreui/react'
+import { CNavGroup, CNavItem } from '@coreui/react'
 
 const _nav = [
   {
@@ -6,10 +6,23 @@ const _nav = [
     name: 'Dashboard',
     to: '/dashboard',
   },
+
   {
-    component: CNavItem,
+    component: CNavGroup,
     name: 'Quiz Managment',
-    to: '/',
+    to: '/quiz',
+    items: [
+      {
+        component: CNavItem,
+        name: 'Create Category',
+        to: '/quiz/Create-Category',
+      },
+      {
+        component: CNavItem,
+        name: 'Create-Edit/Question',
+        to: '/quiz/create-edit/question',
+      },
+    ],
   },
   {
     component: CNavItem,

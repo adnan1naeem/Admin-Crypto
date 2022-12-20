@@ -187,7 +187,6 @@ const Dashboard = () => {
           <CCard className="mb-4">
             <CCardBody>
               <br />
-
               <CTable align="middle" className="mb-0 border" hover responsive>
                 <CTableHead color="light">
                   <CTableRow>
