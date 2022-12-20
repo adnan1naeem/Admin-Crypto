@@ -46,13 +46,13 @@ const WidgetsDropdown = () => {
         <CWidgetStatsA
           style={{ paddingBottom: 20 }}
           className="mb-4"
-          color="warning"
+          color="secondary"
           value={
             <>
-              1.9K <span className="fs-6 fw-normal"></span>
+              44K <span className="fs-6 fw-normal"></span>
             </>
           }
-          title="Crypto Chanllenges Taken Today"
+          title="Pepper Spent Today By Players"
         />
       </CCol>
       <CCol sm={6} lg={3}>
@@ -72,13 +72,13 @@ const WidgetsDropdown = () => {
         <CWidgetStatsA
           style={{ paddingBottom: 20 }}
           className="mb-4"
-          color="secondary"
+          color="warning"
           value={
             <>
-              44K <span className="fs-6 fw-normal"></span>
+              1.9K <span className="fs-6 fw-normal"></span>
             </>
           }
-          title="Pepper Spent Today By Players"
+          title="Crypto Challenges Today"
         />
       </CCol>
     </CRow>
