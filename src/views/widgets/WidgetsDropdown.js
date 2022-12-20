@@ -29,6 +29,58 @@ const WidgetsDropdown = () => {
           title="Total Players"
         />
       </CCol>
+      <CCol sm={6} lg={3}>
+        <CWidgetStatsA
+          style={{ paddingBottom: 20 }}
+          className="mb-4"
+          color="info"
+          value={
+            <>
+              3.8K <span className="fs-6 fw-normal"></span>
+            </>
+          }
+          title="Daily Quiz Taken Today"
+        />
+      </CCol>
+      <CCol sm={6} lg={3}>
+        <CWidgetStatsA
+          style={{ paddingBottom: 20 }}
+          className="mb-4"
+          color="warning"
+          value={
+            <>
+              1.9K <span className="fs-6 fw-normal"></span>
+            </>
+          }
+          title="Crypto Chanllenges Taken Today"
+        />
+      </CCol>
+      <CCol sm={6} lg={3}>
+        <CWidgetStatsA
+          style={{ paddingBottom: 20 }}
+          className="mb-4"
+          color="danger"
+          value={
+            <>
+              2K <span className="fs-6 fw-normal"></span>
+            </>
+          }
+          title="Active Players Today"
+        />
+      </CCol>
+      <CCol sm={6} lg={3}>
+        <CWidgetStatsA
+          style={{ paddingBottom: 20 }}
+          className="mb-4"
+          color="secondary"
+          value={
+            <>
+              44K <span className="fs-6 fw-normal"></span>
+            </>
+          }
+          title="Pepper Spent Today By Players"
+        />
+      </CCol>
     </CRow>
   )
 }
