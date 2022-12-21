@@ -2,6 +2,7 @@ import player from 'src/assets/images/player.png'
 import verified from 'src/assets/images/verify.png'
 export const DashboardDummyData = [
     {
+        id: '1',
         avatar: { src: player, },
         user: {
             name: 'Jordan55',
@@ -15,6 +16,7 @@ export const DashboardDummyData = [
         },
     },
     {
+        id: '2',
         avatar: { src: player, },
         user: {
             name: 'Jordan55',
@@ -28,6 +30,7 @@ export const DashboardDummyData = [
         },
     },
     {
+        id: '3',
         avatar: { src: player, },
         user: {
             name: 'Jordan55',
@@ -41,6 +44,7 @@ export const DashboardDummyData = [
         },
     },
     {
+        id: '4',
         avatar: { src: player, },
         user: {
             name: 'Jordan55',
@@ -54,6 +58,7 @@ export const DashboardDummyData = [
         },
     },
     {
+        id: '5',
         avatar: { src: player, },
         user: {
             name: 'Jordan55',

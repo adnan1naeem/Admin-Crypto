@@ -17,7 +17,11 @@ import {
   CModalBody,
   CModalTitle,
   CButton,
-  CImage
+  CImage,
+  CAccordion,
+  CAccordionItem,
+  CAccordionHeader,
+  CAccordionBody
 } from '@coreui/react'
 import { DashboardDummyData } from 'src/utils/DashboardDummyData'
 import DeleteIcon from 'src/assets/images/bin.png'
@@ -26,11 +30,24 @@ import NextIcon from 'src/assets/images/next.png'
 const Cards = () => {
   const [visible, setVisible] = useState(false);
   const [profileDetail, setProfileDetail] = useState(false);
-  const [userData, setUserData] = useState()
+  const [userData, setUserData] = useState();
+  const [data, setData] = useState(DashboardDummyData);
+  const [singleData, setSingleData] = useState();
 
   const showProfileData = (item) => {
     setUserData(item);
     setProfileDetail(true)
+  }
+  const DeleteItem = () => {
+    const tempArr = [];
+    data?.filter((item) => {
+      console.log(item?.id, singleData?.id, "saim")
+      if (item?.id !== singleData?.id) {
+        tempArr.push(item)
+      }
+    });
+    setData(tempArr)
+    setVisible(false)
   }
   return (
     <CRow>
@@ -53,7 +70,7 @@ const Cards = () => {
               </CTableRow>
             </CTableHead>
             <CTableBody>
-              {DashboardDummyData.map((item, index) => (
+              {data.map((item, index) => (
                 <CTableRow v-for="item in tableItems" key={index}>
                   <CTableDataCell className="text-center">
                     <img src={item.avatar.src} class="img-thumbnail" ></img>
@@ -77,7 +94,7 @@ const Cards = () => {
                     <div>{item.user.xp}</div>
                   </CTableDataCell>
                   <CTableDataCell className="text-center" >
-                    <CAvatar size="lg" src={DeleteIcon} shape="rounded-0" onClick={() => setVisible(true)} style={{ width: 30, height: 30, }} />
+                    <CAvatar size="lg" src={DeleteIcon} shape="rounded-0" onClick={() => { setVisible(true), setSingleData(item) }} style={{ width: 30, height: 30, }} />
                     <CAvatar size="lg" src={NextIcon} shape="rounded-0" onClick={() => showProfileData(item)} style={{ width: 30, height: 30, marginLeft: 10 }} />
                   </CTableDataCell>
                 </CTableRow>
@@ -93,7 +110,7 @@ const Cards = () => {
               <CButton color="secondary" onClick={() => setVisible(false)}>
                 Close
               </CButton>
-              <CButton color="primary">Yes</CButton>
+              <CButton color="primary" onClick={DeleteItem}>Yes</CButton>
             </CModalFooter>
           </CModal>
           <CModal visible={profileDetail} onClose={() => setProfileDetail(false)}>
@@ -103,6 +120,45 @@ const Cards = () => {
             <CModalBody>
               <div className="clearfix">
                 <CImage align="center" rounded src={UserIcon} style={{ width: "100%", height: undefined, aspectRatio: 1.8 }} />
+              </div>
+              <div style={{ paddingTop: 4, paddingBottom: 4, marginTop: 4, borderRadius: 4 }}>
+                <CAccordion flush>
+                  <CAccordionItem itemKey={1}>
+                    <CAccordionHeader>Wallet Details</CAccordionHeader>
+                    <CAccordionBody>
+                      <div style={{ backgroundColor: "#eff7ff", paddingTop: 4, paddingBottom: 4, marginTop: 4, borderRadius: 4 }}>
+                        <CRow>
+                          <CCol style={{ marginLeft: 4 }}>
+                            <strong>{"Total Wallet:"}</strong>
+                          </CCol>
+                          <CCol style={{ marginRight: 4, textAlign: 'right' }}>
+                            <small>{"2"}</small>
+                          </CCol>
+                        </CRow>
+                      </div>
+                      <div style={{ backgroundColor: "#eff7ff", paddingTop: 4, paddingBottom: 4, marginTop: 4, borderRadius: 4 }}>
+                        <CRow>
+                          <CCol style={{ marginLeft: 4 }}>
+                            <strong>{"Bit Coin Wallet Address:"}</strong>
+                          </CCol>
+                          <CCol style={{ marginRight: 4, textAlign: 'right' }}>
+                            <small>{"2543647w4vfdg"}</small>
+                          </CCol>
+                        </CRow>
+                      </div>
+                      <div style={{ backgroundColor: "#eff7ff", paddingTop: 4, paddingBottom: 4, marginTop: 4, borderRadius: 4 }}>
+                        <CRow>
+                          <CCol style={{ marginLeft: 4 }}>
+                            <strong>{"Ethereum Wallet Address"}</strong>
+                          </CCol>
+                          <CCol style={{ marginRight: 4, textAlign: 'right' }}>
+                            <small>{"765e4gfd24tvedv"}</small>
+                          </CCol>
+                        </CRow>
+                      </div>
+                    </CAccordionBody>
+                  </CAccordionItem>
+                </CAccordion>
               </div>
               <div style={{ backgroundColor: "#eff7ff", paddingTop: 4, paddingBottom: 4, marginTop: 4, borderRadius: 4 }}>
                 <CRow>
@@ -121,26 +177,6 @@ const Cards = () => {
                   </CCol>
                   <CCol style={{ marginRight: 4, textAlign: 'right' }}>
                     <small>{userData?.user?.discordUserName}</small>
-                  </CCol>
-                </CRow>
-              </div>
-              <div style={{ backgroundColor: "#eff7ff", paddingTop: 4, paddingBottom: 4, marginTop: 4, borderRadius: 4 }}>
-                <CRow>
-                  <CCol style={{ marginLeft: 4 }}>
-                    <strong>{"Wallet:"}</strong>
-                  </CCol>
-                  <CCol style={{ marginRight: 4, textAlign: 'right' }}>
-                    <small>{userData?.user?.Rank}</small>
-                  </CCol>
-                </CRow>
-              </div>
-              <div style={{ backgroundColor: "#eff7ff", paddingTop: 4, paddingBottom: 4, marginTop: 4, borderRadius: 4 }}>
-                <CRow>
-                  <CCol style={{ marginLeft: 4 }}>
-                    <strong>{"Wallet Number:"}</strong>
-                  </CCol>
-                  <CCol style={{ marginRight: 4, textAlign: 'right' }}>
-                    <small>{"34567fbg453vs"}</small>
                   </CCol>
                 </CRow>
               </div>
