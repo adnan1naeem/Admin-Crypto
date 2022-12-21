@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   CCard,
   CCardBody,
@@ -30,7 +30,21 @@ import EditIcon from 'src/assets/images/edit.png'
 
 const Accordion = () => {
   const [formView, setFormView] = useState(false);
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(false);
+  const [data, setData] = useState(CategoriesDummyData)
+  const [singleData, setSingleData] = useState()
+
+  const DeleteItem = () => {
+    const tempArr = [];
+    data?.filter((item) => {
+      console.log(item?.id, singleData?.id, "saim")
+      if (item?.id !== singleData?.id) {
+        tempArr.push(item)
+      }
+    });
+    setData(tempArr)
+    setVisible(false)
+  }
   return (
     <CRow>
       <CCol xs={12}>
@@ -106,7 +120,7 @@ const Accordion = () => {
                         </CTableRow>
                       </CTableHead>
                       <CTableBody>
-                        {CategoriesDummyData.map((item, index) => (
+                        {data.map((item, index) => (
                           <CTableRow v-for="item in tableItems" key={index}>
                             <CTableDataCell className="text-center">
                               <div>{item.name}</div>
@@ -127,7 +141,7 @@ const Accordion = () => {
                               <CImage src={item.avatar.src} width={50} height={50} />
                             </CTableDataCell>
                             <CTableDataCell className="text-center" >
-                              <CAvatar size="sm" src={DeleteIcon} shape="rounded-0" onClick={() => setVisible(true)} style={{ width: 20, height: 20 }} />
+                              <CAvatar size="sm" src={DeleteIcon} shape="rounded-0" onClick={() => { setVisible(true), setSingleData(item) }} style={{ width: 20, height: 20 }} />
                               <CAvatar size="sm" src={EditIcon} shape="rounded-0" onClick={() => setFormView(true)} style={{ marginLeft: 5 }} />
                             </CTableDataCell>
                           </CTableRow>
@@ -148,7 +162,7 @@ const Accordion = () => {
               <CButton color="secondary" onClick={() => setVisible(false)}>
                 Close
               </CButton>
-              <CButton color="primary">Yes</CButton>
+              <CButton color="primary" onClick={DeleteItem}>Yes</CButton>
             </CModalFooter>
           </CModal>
         </CCard>

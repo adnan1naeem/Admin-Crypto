@@ -1,6 +1,7 @@
 import player from 'src/assets/images/player.png'
 export const QuestionDummyData = [
     {
+        id: '1',
         avatar: { src: player, },
         name: "Test",
         type: 'MC',
@@ -13,6 +14,7 @@ export const QuestionDummyData = [
         difficulty: "Medium",
     },
     {
+        id: '2',
         avatar: { src: player, },
         name: "Test",
         type: 'MC',
@@ -25,6 +27,7 @@ export const QuestionDummyData = [
         difficulty: "Medium",
     },
     {
+        id: '3',
         avatar: { src: player, },
         name: "Test",
         type: 'MC',
@@ -37,6 +40,7 @@ export const QuestionDummyData = [
         difficulty: "Medium",
     },
     {
+        id: '4',
         avatar: { src: player, },
         name: "Test",
         type: 'MC',
@@ -49,6 +53,7 @@ export const QuestionDummyData = [
         difficulty: "Medium",
     },
     {
+        id: '5',
         avatar: { src: player, },
         name: "Test",
         type: 'MC',
@@ -61,6 +66,7 @@ export const QuestionDummyData = [
         difficulty: "Medium",
     },
     {
+        id: '6',
         avatar: { src: player, },
         name: "Test",
         type: 'MC',
