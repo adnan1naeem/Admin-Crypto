@@ -15,21 +15,19 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Create Category',
-        to: '/',
-        // to: '/quiz/Create-Category',
+        to: '/quiz/Create-Category',
       },
       {
         component: CNavItem,
         name: 'Create-Edit/Question',
-        to: '/',
-        // to: '/quiz/create-edit/question',
+        to: '/quiz/create-edit/question',
       },
     ],
   },
   {
     component: CNavItem,
     name: 'User Managment',
-    to: '/',
+    to: '/userManagement',
   },
   {
     component: CNavItem,
@@ -39,7 +37,7 @@ const _nav = [
   {
     component: CNavItem,
     name: 'Push notifications',
-    to: '/',
+    to: '/pushNotification',
   },
   {
     component: CNavItem,
