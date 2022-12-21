@@ -14,11 +14,23 @@ import {
   CTableHeaderCell,
   CTableRow,
   CTableBody,
-  CTable
+  CTable,
+  CTableDataCell,
+  CAvatar,
+  CImage,
+  CModal,
+  CModalHeader,
+  CModalFooter,
+  CModalBody,
+  CModalTitle
 } from '@coreui/react'
+import { CategoriesDummyData } from 'src/utils/CategoriesDummyData';
+import DeleteIcon from 'src/assets/images/bin.png'
+import EditIcon from 'src/assets/images/edit.png'
 
 const Accordion = () => {
   const [formView, setFormView] = useState(false);
+  const [visible, setVisible] = useState(false)
   return (
     <CRow>
       <CCol xs={12}>
@@ -84,21 +96,61 @@ const Accordion = () => {
                     <CTable align="middle" className="mb-0 border" hover responsive>
                       <CTableHead color="light">
                         <CTableRow>
-                          <CTableHeaderCell className="text-center">Category Name</CTableHeaderCell>
+                          <CTableHeaderCell className="text-center" >Category Name</CTableHeaderCell>
                           <CTableHeaderCell className="text-center">Category Description</CTableHeaderCell>
                           <CTableHeaderCell className="text-center">Category Logo</CTableHeaderCell>
                           <CTableHeaderCell className="text-center">Category Reward</CTableHeaderCell>
                           <CTableHeaderCell className="text-center">Sponsored By</CTableHeaderCell>
                           <CTableHeaderCell className="text-center">Sponsored Image</CTableHeaderCell>
+                          <CTableHeaderCell className="text-center">Actions</CTableHeaderCell>
                         </CTableRow>
                       </CTableHead>
-                      <CTableBody></CTableBody>
+                      <CTableBody>
+                        {CategoriesDummyData.map((item, index) => (
+                          <CTableRow v-for="item in tableItems" key={index}>
+                            <CTableDataCell className="text-center">
+                              <div>{item.name}</div>
+                            </CTableDataCell>
+                            <CTableDataCell className="text-left">
+                              <div>{item.description}</div>
+                            </CTableDataCell>
+                            <CTableDataCell className="text-center" >
+                              <CAvatar size="lg" src={item?.logo} shape="rounded-0" onClick={() => console.log("test")} />
+                            </CTableDataCell>
+                            <CTableDataCell className="text-center">
+                              <div>{item.reward}</div>
+                            </CTableDataCell>
+                            <CTableDataCell className="text-center">
+                              <div>{item.sponsoredBy}</div>
+                            </CTableDataCell>
+                            <CTableDataCell className="text-center">
+                              <CImage src={item.avatar.src} width={50} height={50} />
+                            </CTableDataCell>
+                            <CTableDataCell className="text-center" >
+                              <CAvatar size="sm" src={DeleteIcon} shape="rounded-0" onClick={() => setVisible(true)} style={{ width: 20, height: 20 }} />
+                              <CAvatar size="sm" src={EditIcon} shape="rounded-0" onClick={() => setFormView(true)} style={{ marginLeft: 5 }} />
+                            </CTableDataCell>
+                          </CTableRow>
+                        ))}
+                      </CTableBody>
                     </CTable>
                   </CCardBody>
                 </>
               )
             }
           </>
+          <CModal visible={visible} onClose={() => setVisible(false)}>
+            <CModalHeader onClose={() => setVisible(false)}>
+              <CModalTitle>Delete Category</CModalTitle>
+            </CModalHeader>
+            <CModalBody>Are you sure to delete this Category?</CModalBody>
+            <CModalFooter>
+              <CButton color="secondary" onClick={() => setVisible(false)}>
+                Close
+              </CButton>
+              <CButton color="primary">Yes</CButton>
+            </CModalFooter>
+          </CModal>
         </CCard>
       </CCol>
     </CRow>
