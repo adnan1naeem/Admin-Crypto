@@ -25,6 +25,7 @@ const AppHeader = () => {
   return (
     <CHeader position="sticky" className="mb-4">
       <CContainer fluid>
+        <AppBreadcrumb />
       </CContainer>
     </CHeader>
   )
