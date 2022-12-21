@@ -19,7 +19,7 @@
     "lint": "eslint \"src/**/*.js\"",
     "start": "react-scripts start",
     "test": "react-scripts test",
-    "deploy": "netlify deploy --prod",
+    "deploy": " yarn build && netlify deploy --prod",
     "test:cov": "npm test -- --coverage --watchAll=false",
     "test:debug": "react-scripts --inspect-brk test --runInBand"
   },
