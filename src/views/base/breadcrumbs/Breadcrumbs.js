@@ -18,15 +18,25 @@ import {
   CDropdown,
   CDropdownItem,
   CDropdownMenu,
-
+  CTableDataCell,
+  CAvatar,
+  CModal,
+  CModalHeader,
+  CModalFooter,
+  CModalBody,
+  CModalTitle
 } from '@coreui/react'
+import { QuestionDummyData } from 'src/utils/QuestionDummyData';
+import DeleteIcon from 'src/assets/images/bin.png'
+import EditIcon from 'src/assets/images/edit.png'
 
 const Breadcrumbs = () => {
   const [formView, setFormView] = useState(false);
   const [category, setCategory] = useState("Select Category");
   const [questionType, setQuestionType] = useState("Select Question Type");
   const [questionDifficulty, setQuestionDifficulty] = useState("Question Difficulty");
-  const [answer, setAnswer] = useState("Select Answer")
+  const [answer, setAnswer] = useState("Select Answer");
+  const [visible, setVisible] = useState(false)
   return (
     <CRow>
       <CCol xs={12}>
@@ -135,15 +145,53 @@ const Breadcrumbs = () => {
                           <CTableHeaderCell className="text-center">Question Text</CTableHeaderCell>
                           <CTableHeaderCell className="text-center">Question Difficulty</CTableHeaderCell>
                           <CTableHeaderCell className="text-center">Answer</CTableHeaderCell>
+                          <CTableHeaderCell className="text-center">Actions</CTableHeaderCell>
                         </CTableRow>
                       </CTableHead>
-                      <CTableBody></CTableBody>
+                      <CTableBody>
+                        {QuestionDummyData.map((item, index) => (
+                          <CTableRow v-for="item in tableItems" key={index}>
+                            <CTableDataCell className="text-center">
+                              <div>{item.name}</div>
+                            </CTableDataCell>
+                            <CTableDataCell className="text-center">
+                              <div>{item.type}</div>
+                            </CTableDataCell>
+                            <CTableDataCell className="text-center">
+                              <div>{item.description}</div>
+                            </CTableDataCell>
+                            <CTableDataCell className="text-center">
+                              <div>{item.difficulty}</div>
+                            </CTableDataCell>
+                            <CTableDataCell className="text-center">
+                              <div>{item.answer}</div>
+                            </CTableDataCell>
+                            <CTableDataCell className="text-center" >
+                              <CAvatar size="sm" src={DeleteIcon} shape="rounded-0" onClick={() => setVisible(true)} style={{ width: 20, height: 20 }} />
+                              <CAvatar size="sm" src={EditIcon} shape="rounded-0" onClick={() => setFormView(true)} style={{ marginLeft: 5 }} />
+                            </CTableDataCell>
+                          </CTableRow>
+                        ))}
+                      </CTableBody>
                     </CTable>
                   </CCardBody>
                 </>
               )
             }
           </>
+          <CModal visible={visible} onClose={() => setVisible(false)}>
+            <CModalHeader onClose={() => setVisible(false)}>
+              <CModalTitle>Delete Question</CModalTitle>
+            </CModalHeader>
+            <CModalBody>Are you sure to delete this question?</CModalBody>
+            <CModalFooter>
+              <CButton color="secondary" onClick={() => setVisible(false)}>
+                Close
+              </CButton>
+              <CButton color="primary">Yes</CButton>
+            </CModalFooter>
+          </CModal>
+
         </CCard>
       </CCol>
     </CRow>

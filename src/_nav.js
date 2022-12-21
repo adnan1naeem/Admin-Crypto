@@ -14,12 +14,12 @@ const _nav = [
     items: [
       {
         component: CNavItem,
-        name: 'Create Category',
+        name: 'Create Categories',
         to: '/quiz/Create-Category',
       },
       {
         component: CNavItem,
-        name: 'Create-Edit/Question',
+        name: 'Create-Edit/Questions',
         to: '/quiz/create-edit/question',
       },
     ],
@@ -32,7 +32,7 @@ const _nav = [
   {
     component: CNavItem,
     name: 'LeaderBoard and Air drops',
-    to: '/',
+    to: '/login',
   },
   {
     component: CNavItem,
