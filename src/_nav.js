@@ -15,12 +15,12 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Categories',
-        to: '/quiz/Create-Category',
+        to: '/categories',
       },
       {
         component: CNavItem,
         name: 'Questions',
-        to: '/quiz/create-edit/question',
+        to: '/questions',
       },
     ],
   },
