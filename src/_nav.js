@@ -32,13 +32,13 @@ const _nav = [
   {
     component: CNavItem,
     name: 'LeaderBoard and Air drops',
-    to: '/',
+    to: '/forms',
   },
-  {
-    component: CNavItem,
-    name: 'Push notifications',
-    to: '/pushNotification',
-  },
+  // {
+  //   component: CNavItem,
+  //   name: 'Push notifications',
+  //   to: '/pushNotification',
+  // },
 ]
 
 export default _nav

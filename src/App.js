@@ -1,5 +1,6 @@
-import React, { Component, Suspense, useState } from 'react'
+import React, { Suspense, useState } from 'react'
 import { HashRouter, Route, Routes } from 'react-router-dom'
+import Protected from './protected'
 import './scss/style.scss'
 
 const loading = (
@@ -23,12 +24,12 @@ const App = () => {
     <HashRouter>
       <Suspense fallback={loading}>
         <Routes>
+          <Route path="*" name="Home" element={<Protected Component={DefaultLayout} />} />
           <Route path="/login" name="Login Page" element={<Login />} />
           <Route exact path="/register" name="Register Page" element={<Register />} />
           <Route path="/forgotPassword" name="Forgot Password Page" element={<ForgotPassword />} />
           <Route exact path="/404" name="Page 404" element={<Page404 />} />
           <Route exact path="/500" name="Page 500" element={<Page500 />} />
-          <Route path="*" name="Home" element={<DefaultLayout />} />
         </Routes>
       </Suspense>
     </HashRouter>
