@@ -23,9 +23,8 @@ const AppBreadcrumb = () => {
 
   return (
     <h2 style={{ textTransform: 'capitalize' }} >
-      <i class="cil-energy" />
       {size <= 1000 ?
-        <CIcon icon={cilMenu} height={36} onClick={() => !sidebarShow ? dispatch({ type: 'set', sidebarShow: true }) : dispatch({ type: 'set', sidebarShow: false })} />
+        <CIcon icon={cilMenu} height={36} style={{ paddingTop: 12, paddingRight: 10 }} onClick={() => !sidebarShow ? dispatch({ type: 'set', sidebarShow: true }) : dispatch({ type: 'set', sidebarShow: false })} />
         : null}
       {title}
     </h2>
