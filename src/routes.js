@@ -9,7 +9,9 @@ const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
 const Breadcrumbs = React.lazy(() => import('./views/base/breadcrumbs/Breadcrumbs'))
 const Cards = React.lazy(() => import('./views/base/cards/Cards'))
 const Carousels = React.lazy(() => import('./views/base/carousels/Carousels'))
-const FormControl = React.lazy(() => import('./views/forms/form-control/FormControl'))
+const Collapses = React.lazy(() => import("./views/base/collapses/Collapses"))
+const Tokens = React.lazy(() => import("./views/base/jumbotrons/Jumbotrons"))
+const Reward = React.lazy(() => import('./views/base/list-groups/ListGroups'))
 
 const routes = [
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
@@ -21,7 +23,9 @@ const routes = [
   { path: '/questions', name: 'Questions', element: Breadcrumbs },
   { path: '/userManagement', name: 'User Management', element: Cards },
   { path: '/pushNotification', name: 'Push Notification', element: Carousels },
-  { path: '/forms', name: "Forms", element: FormControl },
+  { path: '/wallet', name: "Wallet", element: Collapses },
+  { path: '/tokens', name: "Tokens", element: Tokens },
+  { path: '/rewards', name: "Rewards", element: Reward },
 ]
 
 export default routes

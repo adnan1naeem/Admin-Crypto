@@ -10,7 +10,6 @@ const _nav = [
   {
     component: CNavGroup,
     name: 'Quiz Managment',
-    to: '/quiz',
     items: [
       {
         component: CNavItem,
@@ -25,14 +24,36 @@ const _nav = [
     ],
   },
   {
-    component: CNavItem,
+    component: CNavGroup,
     name: 'User Managment',
-    to: '/userManagement',
+    items: [
+      {
+        component: CNavItem,
+        name: 'Users',
+        to: '/userManagement',
+      },
+      // {
+      //   component: CNavItem,
+      //   name: 'Wallets',
+      //   to: '/wallet',
+      // },
+    ],
   },
   {
-    component: CNavItem,
-    name: 'LeaderBoard and Air drops',
-    to: '/forms',
+    component: CNavGroup,
+    name: 'Air drops',
+    items: [
+      {
+        component: CNavItem,
+        name: 'Rewards',
+        to: '/rewards',
+      },
+      {
+        component: CNavItem,
+        name: 'Tokens',
+        to: '/tokens',
+      },
+    ],
   },
   // {
   //   component: CNavItem,
