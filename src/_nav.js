@@ -14,7 +14,7 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Categories',
-        to: '/categories',
+        to: '/Categories',
       },
       {
         component: CNavItem,
@@ -30,13 +30,8 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Users',
-        to: '/userManagement',
+        to: '/users',
       },
-      // {
-      //   component: CNavItem,
-      //   name: 'Wallets',
-      //   to: '/wallet',
-      // },
     ],
   },
   {
@@ -55,11 +50,6 @@ const _nav = [
       },
     ],
   },
-  // {
-  //   component: CNavItem,
-  //   name: 'Push notifications',
-  //   to: '/pushNotification',
-  // },
 ]
 
 export default _nav
