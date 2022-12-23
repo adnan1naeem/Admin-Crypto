@@ -22,17 +22,24 @@ import {
   CModalHeader,
   CModalFooter,
   CModalBody,
-  CModalTitle
+  CModalTitle,
+  CDropdownToggle,
+  CDropdown,
+  CDropdownItem,
+  CDropdownMenu,
 } from '@coreui/react'
 import { CategoriesDummyData } from 'src/utils/CategoriesDummyData';
 import DeleteIcon from 'src/assets/images/bin.png'
 import EditIcon from 'src/assets/images/edit.png'
+import verified from 'src/assets/images/verify.png'
 
 const Accordion = () => {
   const [formView, setFormView] = useState(false);
   const [visible, setVisible] = useState(false);
   const [data, setData] = useState(CategoriesDummyData)
-  const [singleData, setSingleData] = useState()
+  const [singleData, setSingleData] = useState();
+  const [rank, setRank] = useState("Select Rank");
+  const [category, setCategory] = useState("Select Category")
 
   const DeleteItem = () => {
     const tempArr = [];
@@ -85,9 +92,10 @@ const Accordion = () => {
                       <CFormSwitch label="Part of Daily Quiz" id="formSwitchCheckChecked" defaultChecked />
                       <CFormSwitch label="Crypto Challenge" id="formSwitchCheckChecked" defaultChecked />
                       <div className="mb-3">
-                        <CFormLabel>{`Active Form (7 Days):      Tue Dec 20 2022 15:31:34`}</CFormLabel>
+                        <CFormLabel>{`Active Form (7 Days):      Tue Dec 20 2022 15:31:34  -  Tue Dec 27 2022 15:31:34`}</CFormLabel>
                       </div>
                       <div style={{ marginTop: 20 }}>
+                        <button type="button" style={{ marginRight: 20 }} onClick={() => setFormView(false)} class="btn btn-dark">Back</button>
                         <CButton type="submit" color="primary" onClick={() => setFormView(false)}>
                           Submit
                         </CButton>
@@ -98,12 +106,34 @@ const Accordion = () => {
               ) : (
                 <>
                   <div style={{ marginRight: 20, marginTop: 20, alignSelf: 'flex-end' }}>
+                    <CDropdown style={{ marginRight: 10 }}>
+                      <CDropdownToggle href="#" color="secondary" >
+                        {rank}
+                      </CDropdownToggle>
+                      <CDropdownMenu>
+                        <CDropdownItem onClick={() => setRank("Daily")} >Daily</CDropdownItem>
+                        <CDropdownItem onClick={() => setRank("Weekly")}>Weekly</CDropdownItem>
+                        <CDropdownItem onClick={() => setRank("Monthly")}>Monthly</CDropdownItem>
+                      </CDropdownMenu>
+                    </CDropdown>
+                    <CDropdown style={{ marginRight: 10 }}>
+                      <CDropdownToggle href="#" color="secondary" >
+                        {category}
+                      </CDropdownToggle>
+                      <CDropdownMenu>
+                        <CDropdownItem onClick={() => setCategory("Test 1")} >Test 1</CDropdownItem>
+                        <CDropdownItem onClick={() => setCategory("Test 2")}>Test 2</CDropdownItem>
+                        <CDropdownItem onClick={() => setCategory("Test 3")}>Test 3</CDropdownItem>
+                      </CDropdownMenu>
+                    </CDropdown>
                     <CButton type="submit" color="primary" onClick={() => setFormView(true)}>
                       Add Category
                     </CButton>
+                    <CButton style={{ marginLeft: 10, }} type="submit" color="secondary" >
+                      Export
+                    </CButton>
                   </div>
                   <CCardBody>
-                    <br />
                     <CCardHeader>
                       <strong>All Categories</strong>
                     </CCardHeader>
@@ -116,6 +146,7 @@ const Accordion = () => {
                           <CTableHeaderCell className="text-center">Category Reward</CTableHeaderCell>
                           <CTableHeaderCell className="text-center">Sponsored By</CTableHeaderCell>
                           <CTableHeaderCell className="text-center">Sponsored Image</CTableHeaderCell>
+                          <CTableHeaderCell className="text-center">Status</CTableHeaderCell>
                           <CTableHeaderCell className="text-center">Actions</CTableHeaderCell>
                         </CTableRow>
                       </CTableHead>
@@ -139,6 +170,9 @@ const Accordion = () => {
                             </CTableDataCell>
                             <CTableDataCell className="text-center">
                               <CImage src={item.avatar.src} width={50} height={50} />
+                            </CTableDataCell>
+                            <CTableDataCell className="text-center">
+                              <CAvatar size="md" src={verified} style={{ width: 20, height: 20, }} />
                             </CTableDataCell>
                             <CTableDataCell className="text-center" >
                               <CAvatar size="sm" src={DeleteIcon} shape="rounded-0" onClick={() => { setVisible(true), setSingleData(item) }} style={{ width: 20, height: 20 }} />

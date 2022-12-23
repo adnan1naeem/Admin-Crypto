@@ -21,7 +21,11 @@ import {
   CAccordion,
   CAccordionItem,
   CAccordionHeader,
-  CAccordionBody
+  CAccordionBody,
+  CDropdownToggle,
+  CDropdown,
+  CDropdownItem,
+  CDropdownMenu,
 } from '@coreui/react'
 import { DashboardDummyData } from 'src/utils/DashboardDummyData'
 import DeleteIcon from 'src/assets/images/bin.png'
@@ -33,6 +37,8 @@ const Cards = () => {
   const [userData, setUserData] = useState();
   const [data, setData] = useState(DashboardDummyData);
   const [singleData, setSingleData] = useState();
+  const [rank, setRank] = useState("Select Rank");
+  const [category, setCategory] = useState("Select Category")
 
   const showProfileData = (item) => {
     setUserData(item);
@@ -53,6 +59,31 @@ const Cards = () => {
     <CRow>
       <CCol xs={12}>
         <CCard className="mb-4">
+          <div style={{ marginRight: 20, marginTop: 20, marginBottom: 20, alignSelf: 'flex-end' }}>
+            <CDropdown style={{ marginRight: 10 }}>
+              <CDropdownToggle href="#" color="secondary" >
+                {rank}
+              </CDropdownToggle>
+              <CDropdownMenu>
+                <CDropdownItem onClick={() => setRank("Daily")} >Daily</CDropdownItem>
+                <CDropdownItem onClick={() => setRank("Weekly")}>Weekly</CDropdownItem>
+                <CDropdownItem onClick={() => setRank("Monthly")}>Monthly</CDropdownItem>
+              </CDropdownMenu>
+            </CDropdown>
+            <CDropdown style={{ marginRight: 10 }}>
+              <CDropdownToggle href="#" color="secondary" >
+                {category}
+              </CDropdownToggle>
+              <CDropdownMenu>
+                <CDropdownItem onClick={() => setCategory("Test 1")} >Test 1</CDropdownItem>
+                <CDropdownItem onClick={() => setCategory("Test 2")}>Test 2</CDropdownItem>
+                <CDropdownItem onClick={() => setCategory("Test 3")}>Test 3</CDropdownItem>
+              </CDropdownMenu>
+            </CDropdown>
+            <CButton style={{ marginLeft: 10, }} type="submit" color="secondary" >
+              Export
+            </CButton>
+          </div>
           <CCardHeader>
             <strong>All Users</strong>
           </CCardHeader>
