@@ -19,7 +19,7 @@ import { DropDownData } from 'src/utils/DropDownData';
 
 const CreateQuizSettings = () => {
     const navigation = useNavigate();
-    const [quizName, setQuizName] = useState("Select Quiz Name");
+    const [quizName, setQuizName] = useState("Select Quiz Category");
     const [easyStart, setEasyStart] = useState("Easy Range Start");
     const [easyEnd, setEasyEnd] = useState("Easy Range End");
     const [intermediateStart, setIntermediateStart] = useState("Intermediate Range Start");
