@@ -23,7 +23,7 @@ const _nav = [
       },
       {
         component: CNavItem,
-        name: 'Quiz Questions',
+        name: 'Quiz Settings',
         to: '/quizSettings',
       },
     ],

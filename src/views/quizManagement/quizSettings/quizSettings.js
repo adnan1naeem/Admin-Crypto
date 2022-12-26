@@ -69,10 +69,10 @@ const QuizSettings = () => {
                             <CTableHead color="light">
                                 <CTableRow>
                                     <CTableHeaderCell className="text-center" >Id</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center">Quiz Name</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center">Quiz Category</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center">Easy Range</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center">Intermediate Range</CTableHeaderCell>
-                                    <CTableHeaderCell className="text-center">Export Range</CTableHeaderCell>
+                                    <CTableHeaderCell className="text-center">Expert Range</CTableHeaderCell>
                                     <CTableHeaderCell className="text-center">Actions</CTableHeaderCell>
                                 </CTableRow>
                             </CTableHead>
