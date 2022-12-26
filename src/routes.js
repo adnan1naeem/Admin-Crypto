@@ -24,6 +24,9 @@ const EditReward = React.lazy(() => import("./views/airDrops/rewards/editReward"
 const Tokens = React.lazy(() => import("./views/airDrops/tokens/tokens"))
 const EditToken = React.lazy(() => import("./views/airDrops/tokens/editToken"))
 const CreateToken = React.lazy(() => import("./views/airDrops/tokens/createToken"))
+const Wallet = React.lazy(() => import("./views/userManagement/Wallet/wallets"))
+const CreateWallet = React.lazy(() => import("./views/userManagement/Wallet/createWallet"))
+const EditWallet = React.lazy(() => import("./views/userManagement/Wallet/editWallet"))
 
 const routes = [
 
@@ -50,7 +53,10 @@ const routes = [
   { path: '/editReward', name: "Edit Reward", element: EditReward },
   { path: '/tokens', name: "Tokens", element: Tokens },
   { path: '/editToken', name: 'Edit Token', element: EditToken },
-  { path: '/createToken', name: "Create Token", element: CreateToken }
+  { path: '/createToken', name: "Create Token", element: CreateToken },
+  { path: "/wallet", name: "Wallet", element: Wallet },
+  { path: "/createWallet", name: "Create Wallet", element: CreateWallet },
+  { path: "/editWallet", name: "Edit Wallet", element: EditWallet },
 ]
 
 export default routes

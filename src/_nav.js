@@ -37,6 +37,11 @@ const _nav = [
         name: 'Users',
         to: '/users',
       },
+      {
+        component: CNavItem,
+        name: 'Wallet',
+        to: '/wallet',
+      },
     ],
   },
   {
