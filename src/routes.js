@@ -10,6 +10,9 @@ const CreateCategories = React.lazy(() => import('./views/quizManagement/Categor
 const Questions = React.lazy(() => import('./views/quizManagement/Questions/questions'))
 const EditQuestions = React.lazy(() => import('./views/quizManagement/Questions/editQuestions'))
 const CreateQuestions = React.lazy(() => import('./views/quizManagement/Questions/createQuestions'))
+const QuizSettings = React.lazy(() => import("./views/quizManagement/quizSettings/quizSettings"))
+const CreateQuizSettings = React.lazy(() => import("./views/quizManagement/quizSettings/createQuizSettings"))
+const EditQuizSetting = React.lazy(() => import("./views/quizManagement/quizSettings/editQuizSetting"))
 
 // User Management
 const Users = React.lazy(() => import('./views/userManagement/users'))
@@ -34,6 +37,9 @@ const routes = [
   { path: '/questions', name: 'Questions', element: Questions },
   { path: '/editQuestions', name: "Edit Questions", element: EditQuestions },
   { path: '/createQuestion', name: "Create Question", element: CreateQuestions },
+  { path: '/quizSettings', name: "Quiz Settings", element: QuizSettings },
+  { path: "/createQuizSettings", name: "Create Quiz Settings", element: CreateQuizSettings },
+  { path: "/editQuizSetting", name: "Edit Quiz Setting", element: EditQuizSetting },
 
   //User Management
   { path: "/users", name: "Users", element: Users },
