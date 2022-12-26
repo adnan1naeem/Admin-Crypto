@@ -19,19 +19,18 @@ import {
     CButton,
 } from '@coreui/react'
 import DeleteIcon from 'src/assets/images/bin.png'
-import { TokenDummyData } from 'src/utils/TokenDummyData'
 import EditIcon from 'src/assets/images/edit.png'
 import { useNavigate } from 'react-router-dom'
-const Tokens = () => {
+import { WalletDummyData } from 'src/utils/WalletDummyData'
+const Wallet = () => {
     const navigaton = useNavigate();
     const [visible, setVisible] = useState(false);
-    const [data, setData] = useState(TokenDummyData);
+    const [data, setData] = useState(WalletDummyData);
     const [singleData, setSingleData] = useState();
 
     const DeleteItem = () => {
         const tempArr = [];
         data?.filter((item) => {
-            console.log(item?.id, singleData?.id, "saim")
             if (item?.id !== singleData?.id) {
                 tempArr.push(item)
             }
@@ -46,11 +45,11 @@ const Tokens = () => {
     }
 
     const handleEdit = (item) => {
-        navigaton("/editToken", { state: { item } })
+        navigaton("/editWallet", { state: { item } })
     }
 
     const handleCreate = () => {
-        navigaton('/createToken')
+        navigaton('/createWallet')
     }
 
     return (
@@ -59,20 +58,20 @@ const Tokens = () => {
                 <CCard className="mb-4">
                     <div style={{ marginRight: 20, marginTop: 20, alignSelf: 'flex-end' }}>
                         <CButton type="submit" color="primary" onClick={handleCreate}>
-                            Create Token
+                            Create Wallet
                         </CButton>
                     </div>
                     <br />
                     <CCardHeader>
-                        <strong>All Tokens</strong>
+                        <strong>All Wallets</strong>
                     </CCardHeader>
                     <CTable align="middle" className="mb-0 border" hover responsive>
                         <CTableHead color="light">
                             <CTableRow>
                                 <CTableHeaderCell className="text-center">ID</CTableHeaderCell>
-                                <CTableHeaderCell className="text-center">Token Name</CTableHeaderCell>
-                                <CTableHeaderCell className="text-center">Token Image</CTableHeaderCell>
-                                <CTableHeaderCell className="text-center">Token Address</CTableHeaderCell>
+                                <CTableHeaderCell className="text-center">Wallet Name</CTableHeaderCell>
+                                <CTableHeaderCell className="text-center">Wallet Image</CTableHeaderCell>
+                                <CTableHeaderCell className="text-center">Wallet Address</CTableHeaderCell>
                                 <CTableHeaderCell className="text-center">Actions</CTableHeaderCell>
                             </CTableRow>
                         </CTableHead>
@@ -101,9 +100,9 @@ const Tokens = () => {
                     </CTable>
                     <CModal visible={visible} onClose={() => setVisible(false)}>
                         <CModalHeader onClose={() => setVisible(false)}>
-                            <CModalTitle>Delete Token</CModalTitle>
+                            <CModalTitle>Delete Wallet</CModalTitle>
                         </CModalHeader>
-                        <CModalBody>Are you sure to delete this token?</CModalBody>
+                        <CModalBody>Are you sure to delete this wallet?</CModalBody>
                         <CModalFooter>
                             <CButton color="secondary" onClick={() => setVisible(false)}>
                                 Close
@@ -117,4 +116,4 @@ const Tokens = () => {
     )
 }
 
-export default Tokens
+export default Wallet
