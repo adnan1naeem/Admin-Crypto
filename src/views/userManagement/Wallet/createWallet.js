@@ -10,17 +10,19 @@ import {
     CCardBody,
     CFormInput
 } from '@coreui/react'
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useHis } from 'react-router-dom';
 const CreateWallet = () => {
     const data = useLocation();
     const navigation = useNavigate();
     const [tokenName, setTokenName] = useState("");
-    const [image, setImage] = useState("");
     const [address, setAddress] = useState("");
+    const [selectedImage, setSelectedImage] = useState(null);
 
     const handleBack = () => {
         navigation('/wallet')
     }
+
+
     return (
         <CRow>
             <CCol xs={12}>
@@ -36,7 +38,9 @@ const CreateWallet = () => {
                             </div>
                             <div className="mb-3">
                                 <CFormLabel>Wallet Image</CFormLabel>
-                                <CFormInput type="file" />
+                                <CFormInput type="file" value={selectedImage} onChange={(event) => {
+                                    setSelectedImage(event.target.files[0]);
+                                }} />
                             </div>
                             <div className="mb-3">
                                 <CFormLabel >Wallet Address</CFormLabel>
