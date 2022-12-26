@@ -19,7 +19,7 @@ const EditWallet = () => {
     const [address, setAddress] = useState("");
 
     useEffect(() => {
-        setTokenName(data?.state?.item?.name);
+        setTokenName(data?.state?.item?.type);
         setAddress(data?.state?.item?.address)
     }, [])
     const handleBack = () => {

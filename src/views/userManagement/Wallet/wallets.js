@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState, Suspense } from 'react'
 import {
     CCard,
     CCardHeader,
@@ -19,14 +19,35 @@ import {
     CButton,
 } from '@coreui/react'
 import DeleteIcon from 'src/assets/images/bin.png'
+import ReactLoading from "react-loading";
 import EditIcon from 'src/assets/images/edit.png'
 import { useNavigate } from 'react-router-dom'
 import { WalletDummyData } from 'src/utils/WalletDummyData'
+import RestApi from 'src/services/services'
+
 const Wallet = () => {
     const navigaton = useNavigate();
     const [visible, setVisible] = useState(false);
     const [data, setData] = useState(WalletDummyData);
     const [singleData, setSingleData] = useState();
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        RestApi.getInstance().get('admin/wallets', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then((res) => {
+                setData(res?.data?.data)
+                setLoading(false)
+            })
+            .catch((err) => {
+                setLoading(false)
+                alert(err?.response?.data?.message)
+            })
+    }, [])
 
     const DeleteItem = () => {
         const tempArr = [];
@@ -65,39 +86,51 @@ const Wallet = () => {
                     <CCardHeader>
                         <strong>All Wallets</strong>
                     </CCardHeader>
-                    <CTable align="middle" className="mb-0 border" hover responsive>
-                        <CTableHead color="light">
-                            <CTableRow>
-                                <CTableHeaderCell className="text-center">ID</CTableHeaderCell>
-                                <CTableHeaderCell className="text-center">Wallet Name</CTableHeaderCell>
-                                <CTableHeaderCell className="text-center">Wallet Image</CTableHeaderCell>
-                                <CTableHeaderCell className="text-center">Wallet Address</CTableHeaderCell>
-                                <CTableHeaderCell className="text-center">Actions</CTableHeaderCell>
-                            </CTableRow>
-                        </CTableHead>
-                        <CTableBody>
-                            {data.map((item, index) => (
-                                <CTableRow v-for="item in tableItems" key={index}>
-                                    <CTableDataCell className="text-center">
-                                        <div>{item.id}</div>
-                                    </CTableDataCell>
-                                    <CTableDataCell className="text-center">
-                                        <div>{item.name}</div>
-                                    </CTableDataCell>
-                                    <CTableDataCell className="text-center">
-                                        <CAvatar size="md" src={item.avatar.src} style={{ width: 50, height: 50, }} />
-                                    </CTableDataCell>
-                                    <CTableDataCell className="text-center">
-                                        <div>{item.address}</div>
-                                    </CTableDataCell>
-                                    <CTableDataCell className="text-center" >
-                                        <CAvatar size="lg" src={DeleteIcon} shape="rounded-0" onClick={() => handleDelete(item)} style={{ width: 30, height: 30, }} />
-                                        <CAvatar size="lg" src={EditIcon} shape="rounded-0" onClick={() => handleEdit(item)} style={{ width: 30, height: 30, marginLeft: 10 }} />
-                                    </CTableDataCell>
-                                </CTableRow>
-                            ))}
-                        </CTableBody>
-                    </CTable>
+                    {
+                        loading ? (
+                            <div style={{ alignSelf: 'center', marginTop: 50, marginBottom: 50 }}>
+                                <ReactLoading type="spin" color="#0000FF"
+                                    height={50} width={50} />
+                            </div>
+                        ) : (
+                            <CTable align="middle" className="mb-0 border" hover responsive>
+                                <CTableHead color="light">
+                                    <CTableRow>
+                                        <CTableHeaderCell className="text-center">ID</CTableHeaderCell>
+                                        <CTableHeaderCell className="text-center">Wallet Name</CTableHeaderCell>
+                                        <CTableHeaderCell className="text-center">Wallet Image</CTableHeaderCell>
+                                        <CTableHeaderCell className="text-center">Wallet Address</CTableHeaderCell>
+                                        <CTableHeaderCell className="text-center">Actions</CTableHeaderCell>
+                                    </CTableRow>
+                                </CTableHead>
+                                <CTableBody>
+                                    {data.map((item, index) => (
+                                        <CTableRow v-for="item in tableItems" key={index}>
+                                            <CTableDataCell className="text-center">
+                                                <div>{item._id}</div>
+                                            </CTableDataCell>
+                                            <CTableDataCell className="text-center">
+                                                <div>{item.type}</div>
+                                            </CTableDataCell>
+                                            {/* <CTableDataCell className="text-center">
+                                                <CAvatar size="md" src={item.avatar.src} style={{ width: 50, height: 50, }} />
+                                            </CTableDataCell> */}
+                                            <CTableDataCell className="text-center">
+                                                <div>{"Wallet Image"}</div>
+                                            </CTableDataCell>
+                                            <CTableDataCell className="text-center">
+                                                <div>{"Wallet Address"}</div>
+                                            </CTableDataCell>
+                                            <CTableDataCell className="text-center" >
+                                                <CAvatar size="lg" src={DeleteIcon} shape="rounded-0" onClick={() => handleDelete(item)} style={{ width: 30, height: 30, }} />
+                                                <CAvatar size="lg" src={EditIcon} shape="rounded-0" onClick={() => handleEdit(item)} style={{ width: 30, height: 30, marginLeft: 10 }} />
+                                            </CTableDataCell>
+                                        </CTableRow>
+                                    ))}
+                                </CTableBody>
+                            </CTable>
+                        )
+                    }
                     <CModal visible={visible} onClose={() => setVisible(false)}>
                         <CModalHeader onClose={() => setVisible(false)}>
                             <CModalTitle>Delete Wallet</CModalTitle>
