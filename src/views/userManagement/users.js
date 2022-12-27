@@ -17,50 +17,27 @@ import {
     CModalBody,
     CModalTitle,
     CButton,
-    CImage,
-    CAccordion,
-    CAccordionItem,
-    CAccordionHeader,
-    CAccordionBody,
 } from '@coreui/react'
 import DeleteIcon from 'src/assets/images/bin.png'
-import UserIcon from 'src/assets/images/user.webp'
 import NextIcon from 'src/assets/images/next.png'
-import CustomUserDataCard from './CustomUserDataCard'
 import RestApi from 'src/services/services'
 import ReactLoading from "react-loading";
-import CustomWalletListCard from './customWalletListCard'
+import { useNavigate } from 'react-router-dom'
 
 const Users = () => {
+    const navigation = useNavigate();
     const [visible, setVisible] = useState(false);
-    const [profileDetail, setProfileDetail] = useState(false);
-    const [userData, setUserData] = useState();
     const [data, setData] = useState([]);
     const [singleData, setSingleData] = useState();
     const [loading, setLoading] = useState();
     const token = localStorage.getItem('token');
-    const [profileLoading, setProfileLoading] = useState(false)
 
     useEffect(() => {
         getUsers()
     }, [])
 
     const showProfileData = async (item) => {
-        setProfileDetail(true)
-        setProfileLoading(true)
-        await RestApi.getInstance().get(`admin/users/${item?._id}`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-            .then((res) => {
-                setUserData(res?.data?.data)
-                setProfileLoading(false)
-            })
-            .catch((err) => {
-                alert(err?.response?.data?.message)
-                setProfileLoading(false)
-            })
+        navigation("/userDetail", { state: { item } })
     }
     const handleDelete = (item) => {
         setVisible(true)
@@ -99,10 +76,6 @@ const Users = () => {
                 alert(err?.response?.data?.message)
                 setSingleData("")
             })
-    }
-    const profileModalClose = () => {
-        setProfileDetail(false)
-        setUserData("")
     }
     return (
         <CRow>
@@ -170,72 +143,6 @@ const Users = () => {
                                 Close
                             </CButton>
                             <CButton color="primary" onClick={deleteUser}>Yes</CButton>
-                        </CModalFooter>
-                    </CModal>
-                    <CModal visible={profileDetail} onClose={profileModalClose}>
-                        <CModalHeader onClose={profileModalClose} >
-                            <CModalTitle >{"User Details"}</CModalTitle>
-                        </CModalHeader>
-                        {
-                            profileLoading ? (
-                                <div style={{ alignSelf: 'center', marginTop: 50, marginBottom: 50 }}>
-                                    <ReactLoading type="spin" color="#0000FF"
-                                        height={50} width={50} />
-                                </div>
-                            ) : (
-                                <CModalBody>
-                                    <div className="clearfix">
-                                        <CImage align="center" rounded src={`https://cryptonaire.herokuapp.com/media/${userData?.avatar}`} />
-                                    </div>
-                                    <div style={{ paddingTop: 4, paddingBottom: 4, marginTop: 4, borderRadius: 4 }}>
-                                        <CAccordion flush>
-                                            <CAccordionItem itemKey={1}>
-                                                <CAccordionHeader>Wallet Details</CAccordionHeader>
-                                                <CAccordionBody>
-                                                    <CustomUserDataCard
-                                                        title={"Total Wallet:"}
-                                                        description={userData?.wallets?.length}
-                                                    />
-                                                    <CustomWalletListCard
-                                                        title={"Wallet Address:"}
-                                                        description={"765e4gfd24tvedv"}
-                                                        earningTitle={"Earning:"}
-                                                        earning={"$239"}
-                                                    />
-                                                </CAccordionBody>
-                                            </CAccordionItem>
-                                        </CAccordion>
-                                    </div>
-                                    <CustomUserDataCard
-                                        title={"User Name:"}
-                                        description={userData?.username}
-                                    />
-                                    <CustomUserDataCard
-                                        title={"Discord userName:"}
-                                        description={userData?.discord_username}
-                                    />
-                                    <CustomUserDataCard
-                                        title={"Email:"}
-                                        description={userData?.email}
-                                    />
-                                    <CustomUserDataCard
-                                        title={"Salt:"}
-                                        description={userData?.salt}
-                                    />
-                                    <CustomUserDataCard
-                                        title={"Is Admin:"}
-                                        description={JSON.stringify(userData?.isAdmin)}
-                                    />
-                                    <CustomUserDataCard
-                                        title={"isActive:"}
-                                        description={JSON.stringify(userData?.isActive)}
-                                    />
-                                </CModalBody>
-                            )}
-                        <CModalFooter>
-                            <CButton color="secondary" onClick={() => setProfileDetail(false)}>
-                                Close
-                            </CButton>
                         </CModalFooter>
                     </CModal>
                 </CCard>

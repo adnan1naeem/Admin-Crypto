@@ -16,6 +16,7 @@ const EditQuizSetting = React.lazy(() => import("./views/quizManagement/quizSett
 
 // User Management
 const Users = React.lazy(() => import('./views/userManagement/users'))
+const UserDetail = React.lazy(() => import('./views/userManagement/userDetail/userDetails'))
 
 // Air Drop
 const Rewards = React.lazy(() => import('./views/airDrops/rewards/rewards'))
@@ -46,6 +47,7 @@ const routes = [
 
   //User Management
   { path: "/users", name: "Users", element: Users },
+  { path: '/userDetail', name: "User Detail", element: UserDetail },
 
   //Air Drops
   { path: '/rewards', name: "Rewards", element: Rewards },
