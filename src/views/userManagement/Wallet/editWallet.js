@@ -11,20 +11,52 @@ import {
     CFormInput
 } from '@coreui/react'
 import { useLocation, useNavigate } from 'react-router-dom';
+import RestApi from 'src/services/services';
+import ReactLoading from "react-loading";
 const EditWallet = () => {
     const data = useLocation();
     const navigation = useNavigate();
-    const [tokenName, setTokenName] = useState("");
+    const [walletType, setWalletType] = useState("");
     const [image, setImage] = useState("");
     const [address, setAddress] = useState("");
+    const [loading, setLoading] = useState("");
+    const [walletId, setWalletId] = useState("")
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
-        setTokenName(data?.state?.item?.type);
+        setWalletType(data?.state?.item?.type);
+        setWalletId(data?.state?.item?._id);
         setAddress(data?.state?.item?.address)
     }, [])
     const handleBack = () => {
         navigation('/wallet')
     }
+
+    const updateWallet = async () => {
+        setLoading(true)
+        if (!walletType) {
+            alert("Wallet Type Required");
+            setLoading(false)
+            return;
+        }
+        const data = {
+            type: walletType,
+        }
+        await RestApi.getInstance().patch(`admin/wallets/${walletId}`, data, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then((res) => {
+                setLoading(false)
+                navigation("/wallet")
+            })
+            .catch((err) => {
+                setLoading(false)
+                alert(err?.response?.data?.message)
+            })
+    }
+
     return (
         <CRow>
             <CCol xs={12}>
@@ -35,8 +67,8 @@ const EditWallet = () => {
                     <CCardBody>
                         <CForm>
                             <div className="mb-3">
-                                <CFormLabel >Wallet Name</CFormLabel>
-                                <CFormInput type="text" value={tokenName} onChange={(e) => setTokenName(e.target.value)} />
+                                <CFormLabel >Wallet Type</CFormLabel>
+                                <CFormInput type="text" value={walletType} onChange={(e) => setWalletType(e.target.value)} />
                             </div>
                             <div className="mb-3">
                                 <CFormLabel>Wallet Image</CFormLabel>
@@ -48,9 +80,20 @@ const EditWallet = () => {
                             </div>
                             <div style={{ marginTop: 20 }}>
                                 <button type="button" style={{ marginRight: 20 }} onClick={handleBack} class="btn btn-dark">Back</button>
-                                <CButton type="submit" color="primary">
-                                    Submit
-                                </CButton>
+                                {
+                                    loading ? (
+                                        <CButton color="primary" className="px-4" >
+                                            <div style={{ alignSelf: 'center' }}>
+                                                <ReactLoading type="spin" color="#ffffff"
+                                                    height={30} width={30} />
+                                            </div>
+                                        </CButton>
+                                    ) : (
+                                        <CButton color="primary" className="px-4" type="submit" onClick={updateWallet}>
+                                            Submit
+                                        </CButton>
+                                    )
+                                }
                             </div>
                         </CForm>
                     </CCardBody>

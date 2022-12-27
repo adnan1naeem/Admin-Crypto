@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Suspense } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     CCard,
     CCardHeader,
@@ -22,43 +22,19 @@ import DeleteIcon from 'src/assets/images/bin.png'
 import ReactLoading from "react-loading";
 import EditIcon from 'src/assets/images/edit.png'
 import { useNavigate } from 'react-router-dom'
-import { WalletDummyData } from 'src/utils/WalletDummyData'
 import RestApi from 'src/services/services'
 
 const Wallet = () => {
     const navigaton = useNavigate();
     const [visible, setVisible] = useState(false);
-    const [data, setData] = useState(WalletDummyData);
+    const [data, setData] = useState([]);
     const [singleData, setSingleData] = useState();
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false);
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
-        RestApi.getInstance().get('admin/wallets', {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-            .then((res) => {
-                setData(res?.data?.data)
-                setLoading(false)
-            })
-            .catch((err) => {
-                setLoading(false)
-                alert(err?.response?.data?.message)
-            })
+        getWalletList()
     }, [])
-
-    const DeleteItem = () => {
-        const tempArr = [];
-        data?.filter((item) => {
-            if (item?.id !== singleData?.id) {
-                tempArr.push(item)
-            }
-        });
-        setData(tempArr)
-        setVisible(false)
-    }
 
     const handleDelete = (item) => {
         setVisible(true)
@@ -73,6 +49,38 @@ const Wallet = () => {
         navigaton('/createWallet')
     }
 
+    const getWalletList = () => {
+        setLoading(true)
+        RestApi.getInstance().get('admin/wallets', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then((res) => {
+                setData(res?.data?.data)
+                setLoading(false)
+            })
+            .catch((err) => {
+                setLoading(false)
+                alert(err?.response?.data?.message)
+            })
+    }
+
+    const deleteWallet = () => {
+        RestApi.getInstance().delete(`admin/wallets/${singleData?._id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then((res) => {
+                setVisible(false)
+                getWalletList()
+            })
+            .catch((err) => {
+                setVisible(false)
+                alert(err?.response?.data?.message)
+            })
+    }
     return (
         <CRow>
             <CCol xs={12}>
@@ -140,7 +148,7 @@ const Wallet = () => {
                             <CButton color="secondary" onClick={() => setVisible(false)}>
                                 Close
                             </CButton>
-                            <CButton color="primary" onClick={DeleteItem}>Yes</CButton>
+                            <CButton color="primary" onClick={deleteWallet}>Yes</CButton>
                         </CModalFooter>
                     </CModal>
                 </CCard>
